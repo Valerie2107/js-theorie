@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Captcha</title>
+	</head>
+	
+	<body>
+		<h1>CAPTCHA</h1>
+        <h2>Logique</h2>
+            - De stocker les caractères alphanumériques
+            - Tirer des caractères au hasard (Math.random)
+            - Vérifier si l'entrée utilisateur est égale au captcha
+            - Si réussi: On laisse l'action se passer
+            - Si raté: On génère un nouveau captcha à compléter
+
+        <h2>Graphique</h2>
+            - Lier la logique et l'interface utilisateur (input, HTML) !
+            - Rendre le captcha non copiable
+            - Rendre les caractères plus difficiles à afficher
+    
+		<div>
+			<p>pour avoir l'ensemble des index e mon array je vais devoir faire un math.random entre 0 et 61 (vu qu'on commence à 0 dans un array). <br>
+				on doit faire le max-min sinon les valeurs vont simplement s'adittionner.</p>
+			<p id="captcha"><p>
+			<input id="captchaInput" type="text" placeholder="Entrez le captcha"></br></br>
+			<button id="captchaValidate">Valider</button>
+			<button id="captchaRefresh">Refresh</button>
+		</div>
+	
+	
+		<script>
+			function captchaCF2M(captchaLen) {  //le captchaCF2M est là pour englober le tout et éviter les collisions avec d'autres codes/modules. Je met donc tout dans une fonction et je rend mes const, var et let dans un module qui va fonctionner et le script ne s'arretera pas
+			//en dehors de ma fonction captchaCF2M, je n'ai pas accès à mes fonctions. 
+				function randomInt(min, max) {
+					return Math.floor(Math.random() * (max - min + 1) + min)
+				}
+				
+				function getElementsFromArray(array, numberOfElements) {
+					let arrayOfElements = [];
+					for (let i = 0; i < numberOfElements; i++) {
+						let randomElement = array[randomInt(0, array.length - 1)];
+						arrayOfElements.push(randomElement);
+					}
+					return arrayOfElements
+				}
+				
+				function generateCaptcha() {
+					captcha.innerHTML = "";
+
+					let captchaArray = getElementsFromArray(allCharacters, captchaLen);
+					for (let i = 0; i < captchaArray.length; i++) {
+						captcha.insertAdjacentHTML('beforeend', `<span>${captchaArray[i]}</span>`);
+					}
+				}
+
+				function validateCaptcha() {
+					if (captcha.textContent === captchaInput.value) {
+						console.log("Heeyyy");
+						// Action à effectuer
+					} else {
+						generateCaptcha(captchaLen);
+					}
+				}
+			
+				const allCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+				const captcha = document.querySelector('#captcha');
+				const captchaInput = document.querySelector('#captchaInput');
+				const captchaValidate = document.querySelector('#captchaValidate');
+				const captchaRefresh = document.querySelector('#captchaRefresh');
+
+				generateCaptcha(captchaLen);
+				captchaValidate.addEventListener('click', validateCaptcha);
+				captchaRefresh.addEventListener('click', generateCaptcha);
+			}
+
+			captchaCF2M(6)  //il y aura 6 caractères à mon captcha
+		</script>
+	</body>
+</html>
