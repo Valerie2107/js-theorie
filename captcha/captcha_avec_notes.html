@@ -32,19 +32,23 @@
 		<script>
 			function captchaCF2M(captchaLen) {  //le captchaCF2M est là pour englober le tout et éviter les collisions avec d'autres codes/modules. Je met donc tout dans une fonction et je rend mes const, var et let dans un module qui va fonctionner et le script ne s'arretera pas
 			//en dehors de ma fonction captchaCF2M, je n'ai pas accès à mes fonctions. 
-				function randomInt(min, max) {
-					return Math.floor(Math.random() * (max - min + 1) + min)
+				function randomInt/*ou tirerAuSort ou piou*/(min, max) {
+					return Math.floor(Math.random() * (max - min + 1) + min);
 				}
 				
-				function getElementsFromArray(array, numberOfElements) {
+				/* Tirer x element au sort dans un tableau */
+				function getElementsFromArray(array, numberOfElements) { //ma fonction ici a des noms génériques pour pouvoir être réutilisée plus tard dans n'importe quel type de fontion du même genre. array aurait pu s'appeler piou ou cuicui, idem pour la deuxieme
 					let arrayOfElements = [];
 					for (let i = 0; i < numberOfElements; i++) {
-						let randomElement = array[randomInt(0, array.length - 1)];
-						arrayOfElements.push(randomElement);
+						let randomElement = array[randomInt(0, array.length - 1)];  //array est la var définie précédement en parametres (et qui aurait pu etre piou)
+						arrayOfElements.push(randomElement);  //push est prédéfini comme math.random, console.log
 					}
-					return arrayOfElements
+					return arrayOfElements;
 				}
 				
+
+				//avec le resultat du tirage au sort, il va mettre les lettres dans des spans
+				//les spans sont générés par le script en fonction du nombre de caractères demandés (captchalen)
 				function generateCaptcha() {
 					captcha.innerHTML = "";
 
@@ -54,6 +58,9 @@
 					}
 				}
 
+
+				//fonction qui se déclenche quand l'utilisateur clique sur le bouton vlidate et qui compare ce qui a été écrit dans le input (textcontent) avec ce que generateCaptcha a généré
+				//il va chercher dynamiquement ce qui a été indiqué dans le html plutot que de le stocker dans une fonction JS qu'un user pourrait voir dans la console
 				function validateCaptcha() {
 					if (captcha.textContent === captchaInput.value) {
 						console.log("Heeyyy");
@@ -73,6 +80,10 @@
 				captchaValidate.addEventListener('click', validateCaptcha);
 				captchaRefresh.addEventListener('click', generateCaptcha);
 			}
+
+
+
+
 
 			captchaCF2M(6)  //il y aura 6 caractères à mon captcha
 		</script>
