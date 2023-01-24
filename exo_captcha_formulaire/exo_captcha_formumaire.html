@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exo formulaire avec un captcha intégré</title>
+    <link rel="stylesheet" href="exo_captcha_formumaire.css">
+</head>
+<body>
+    <main class="wif-wouf">
+        <form action="">
+            <div class="wouf">
+                <label for="nom">Login : </label>
+                <input type="text" name="login" id="log" placeholder="Votre identifiant">
+            </div>
+            <br>
+            <div class="wouf">
+                <label for="password">Mot de passe : </label>
+                <input type="password" name="password" id="pass" placeholder="Votre mot de passe" >
+            </div>
+            <br>
+            <div>
+                <p id="captcha"><p>
+                <input id="captchaInput" type="text" placeholder="Entrez le captcha"></br></br>
+                <button id="captchaValidate">Valider</button>
+                <button id="captchaRefresh">Refresh</button>
+            </div>
+        </form>
+    </main>
+    <script src="exo_captcha_formulaire.js"></script>
+</body>
+</html>

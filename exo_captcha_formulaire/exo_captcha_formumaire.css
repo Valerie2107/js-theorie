@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+}
+html{
+    min-height: 100%;
+}
+body{
+    background-image: url(images/sous-l-ocean_1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    font-family: cursive;
+}
+main{
+    line-height: 1.5em;
+    color: rgb(25, 127, 145);
+}
+#captcha {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+
+    background-color: black;
+    display: inline;
+    padding: 0.8em;
+    border-radius: 5px;
+}
